@@ -33,35 +33,7 @@ label{display:block;color:var(--muted);font-size:12px;font-weight:800;margin:16p
 .search{margin:6px 0 12px}.search input{background:var(--surface2)}
 .check{display:flex;align-items:center;gap:12px;padding:13px 4px;border-bottom:1px solid var(--line)}.box{width:23px;height:23px;border:2px solid var(--line);border-radius:7px;display:grid;place-items:center;flex:none}.box.on{background:var(--gold);border-color:var(--gold);color:#201805;font-weight:900}
 .bottom{position:fixed;bottom:0;left:0;right:0;height:70px;background:rgba(21,23,25,.96);border-top:1px solid var(--line);display:flex;z-index:20;padding-bottom:env(safe-area-inset-bottom)}.tab{flex:1;background:none;border:0;color:var(--muted);font-size:11px;font-weight:700}.tab span{display:block;font-size:20px;margin-bottom:2px}.tab.active{color:var(--gold)}
-#player{display:none;position:fixed;inset:0;z-index:50;background:var(--bg);flex-direction:column}#player.on{display:flex}.playerbar{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:8px}.playerbody{flex:1;overflow:auto;padding:17px 18px 110px}.playerhead{padding:14px 18px 4px}.playerhead h2{margin:0;font-size:23px}.key{display:inline-block;margin-top:6px;background:rgba(224,173,75,.13);color:var(--gold);padding:4px 9px;border-radius:8px;font-size:12px;font-weight:800}.cifra{
-font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-white-space:pre;
-line-height:1.72;
-font-size:16px;
-overflow-x:auto;
--webkit-overflow-scrolling:touch;
-}
-.cifra-pair{
-display:block;
-margin:0;
-padding:0;
-}
-.cifra-chords{
-display:block;
-height:1.25em;
-line-height:1.25;
-white-space:pre;
-}
-.cifra-lyrics{
-display:block;
-white-space:pre;
-}
-.chord{
-color:#ffb300;
-font-weight:900;
-font-size:1.04em;
-text-shadow:0 0 7px rgba(255,179,0,.35);
-}.playerfoot{position:fixed;bottom:0;left:0;right:0;background:rgba(21,23,25,.97);border-top:1px solid var(--line);display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom))}.playerfoot button{height:48px;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:13px;font-weight:800}.grow{flex:1}.pill{min-width:58px}.toast{position:fixed;left:50%;bottom:82px;transform:translateX(-50%) translateY(20px);background:#30343a;color:var(--text);padding:10px 14px;border-radius:11px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:100}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#player{display:none;position:fixed;inset:0;z-index:50;background:var(--bg);flex-direction:column}#player.on{display:flex}.playerbar{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:8px}.playerbody{flex:1;overflow:auto;padding:17px 18px 110px}.playerhead{padding:14px 18px 4px}.playerhead h2{margin:0;font-size:23px}.key{display:inline-block;margin-top:6px;background:rgba(224,173,75,.13);color:var(--gold);padding:4px 9px;border-radius:8px;font-size:12px;font-weight:800}.cifra{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;line-height:1.72;font-size:16px}.chord{color:var(--gold);font-weight:800}.playerfoot{position:fixed;bottom:0;left:0;right:0;background:rgba(21,23,25,.97);border-top:1px solid var(--line);display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom))}.playerfoot button{height:48px;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:13px;font-weight:800}.grow{flex:1}.pill{min-width:58px}.toast{position:fixed;left:50%;bottom:82px;transform:translateX(-50%) translateY(20px);background:#30343a;color:var(--text);padding:10px 14px;border-radius:11px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:100}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:70;align-items:flex-end}.modal.on{display:flex}.sheet{width:100%;max-width:760px;margin:auto;background:var(--surface);border:1px solid var(--line);border-radius:20px 20px 0 0;padding:18px}.sheet h3{margin:0 0 12px}.sheet .btn{margin-top:9px}
 @media(min-width:700px){.bottom{left:50%;right:auto;width:760px;transform:translateX(-50%);border-left:1px solid var(--line);border-right:1px solid var(--line)}}
 </style>
@@ -107,7 +79,7 @@ text-shadow:0 0 7px rgba(255,179,0,.35);
  <label>Artista / Ministério</label><input id="fArtist" placeholder="Ex.: Isaías Saad">
  <label>Tom original</label><input id="fKey" placeholder="Ex.: D">
  <label>Cifra</label><textarea id="fCifra" placeholder="Cole a cifra aqui..."></textarea>
- <div class="hint">Cole a cifra mantendo os espaços entre os acordes e a letra. Os acordes ficarão bem destacados e alinhados acima do ponto correto. A transposição funciona por semitons.</div>
+ <div class="hint">Você pode colar a cifra completa: acordes em linhas separadas ou junto da letra. O Organize destaca e transpõe os acordes automaticamente.</div>
  <div style="height:14px"></div><button class="btn primary" onclick="saveSong()">Salvar música</button>
 </section>
 <section id="backup" class="screen">
@@ -175,7 +147,7 @@ function renderRepertoires(){
 function renameRep(k){let s=data.setlists[k],n=prompt('Nome do repertório:',s.name);if(n?.trim()){s.name=n.trim();save();renderRepertoires();renderHome()}}
 function renderSongs(){
  let q=(document.getElementById('songSearch')?.value||'').toLowerCase(),arr=Object.values(data.songs).filter(s=>(s.title+' '+(s.artist||'')).toLowerCase().includes(q)).sort((a,b)=>a.title.localeCompare(b.title));
- document.getElementById('songList').innerHTML=arr.map(s=>`<div class="item"><div class="item-main" onclick="editSong('${s.id}')"><div class="item-title">${esc(s.title)}</div><div class="meta">${esc(s.artist||'')}${s.key?' · Tom '+esc(s.key):''}</div></div><div class="row-actions"><button class="small" onclick="editSong('${s.id}')">✎</button><button class="small" onclick="deleteSong('${s.id}')">🗑</button></div></div>`).join('')||`<div class="empty"><div class="big">♫</div><p>Cadastre suas músicas com cifra.</p></div>`
+ document.getElementById('songList').innerHTML=arr.map(s=>`<div class="item"><div class="item-main" onclick="openSong('${s.id}')"><div class="item-title">${esc(s.title)}</div><div class="meta">${esc(s.artist||'')}${s.key?' · Tom '+esc(s.key):''}</div></div><div class="row-actions"><button class="small" onclick="editSong('${s.id}')">✎</button><button class="small" onclick="deleteSong('${s.id}')">🗑</button></div></div>`).join('')||`<div class="empty"><div class="big">♫</div><p>Cadastre suas músicas com cifra.</p></div>`
 }
 function editSong(k=null){
  editing=k;let s=k?data.songs[k]:{title:'',artist:'',key:'',cifra:''};
@@ -206,64 +178,31 @@ function startCurrent(i=0){let s=data.setlists[currentRep];if(!s?.songIds.length
 function closePlayer(){document.getElementById('player').classList.remove('on')}
 function note(n,shift,flat){let v=IDX[n];if(v==null)return n;v=(v+shift+120)%12;return (flat?FL:N)[v]}
 function chordTok(t,shift){return t.split('/').map(p=>{let m=p.match(/^([A-G](?:#|b)?)(.*)$/);return m?note(m[1],shift,m[1].includes('b'))+m[2]:p}).join('/')}
-const chord=/^[A-G](?:#|b)?(?:maj7|maj9|maj|min7|min|m7|m9|m|sus2|sus4|sus|dim7|dim|aug|add9|add|7|9|11|13)*(?:\/[A-G](?:#|b)?)?$/
-function cleanChordLine(line){
- let s=String(line??'');
- // Alguns textos copiados do Cifra Club podem trazer aspas/maior antes do acorde.
- return s.replace(/^(\s*)["'`>]+\s?/, '$1');
+const chord=/^(?:[A-G](?:#|b)?)(?:maj7|maj9|maj|min7|min9|min|m7|m9|m|sus2|sus4|sus|dim7|dim|aug|add9|add2|add|7|9|11|13|6|5|4|2)*(?:\/[A-G](?:#|b)?)?$/
+function isChordToken(token){
+ let clean=(token||'').replace(/^[([\{]/,'').replace(/[)\],;.!?:]+$/,'');
+ return chord.test(clean);
 }
-function chordParts(line){
- let clean=cleanChordLine(line);
- let t=clean.trim();
- if(!t)return null;
- let parts=t.split(/\s+/);
- return parts.length&&parts.every(x=>chord.test(x)) ? {clean,parts} : null;
-}
-function renderChordLine(line,shift){
- let clean=cleanChordLine(line);
- let out='',last=0;
- const re=/\S+/g;
- let m;
- while((m=re.exec(clean))){
-   out+=esc(clean.slice(last,m.index));
-   const token=m[0];
-   out+=chord.test(token)
-     ? `<span class="chord">${esc(chordTok(token,shift))}</span>`
-     : esc(token);
-   last=m.index+token.length;
- }
- out+=esc(clean.slice(last));
- return out;
+function transposeChordText(token,shift){
+ let lead=(token.match(/^[([\{]*/)||[''])[0];
+ let trail=(token.match(/[)\],;.!?:]+$/)||[''])[0];
+ let core=token.slice(lead.length, token.length-trail.length || undefined);
+ return lead+chordTok(core,shift)+trail;
 }
 function renderCifra(txt,shift){
- const lines=(txt||'').split('\n');
- let out=[];
- for(let i=0;i<lines.length;i++){
-   const cur=chordParts(lines[i]);
-   const next= i+1<lines.length ? chordParts(lines[i+1]) : null;
-   const prev= i>0 ? chordParts(lines[i-1]) : null;
-
-   // Formato ideal: acordes acima da letra, mantendo exatamente as colunas.
-   if(cur && i+1<lines.length && !next){
-     out.push(`<div class="cifra-pair"><div class="cifra-chords">${renderChordLine(lines[i],shift)}</div><div class="cifra-lyrics">${esc(lines[i+1])}</div></div>`);
-     i++;
-     continue;
-   }
-
-   // Também corrige cifras em que a cópia trouxe o acorde depois da letra.
-   if(!cur && next){
-     out.push(`<div class="cifra-pair"><div class="cifra-chords">${renderChordLine(lines[i+1],shift)}</div><div class="cifra-lyrics">${esc(lines[i])}</div></div>`);
-     i++;
-     continue;
-   }
-
-   if(cur){
-     out.push(`<div class="cifra-chords">${renderChordLine(lines[i],shift)}</div>`);
-   }else{
-     out.push(`<div class="cifra-lyrics">${esc(lines[i])}</div>`);
-   }
- }
- return out.join('');
+ return (txt||'').split('\n').map(line=>{
+   let raw=line, parts=raw.split(/(\s+)/), chordCount=0;
+   let out=parts.map(part=>{
+     if(/^\s+$/.test(part)||part==='') return esc(part);
+     if(isChordToken(part)) { chordCount++; return `<span class="chord">${esc(transposeChordText(part,shift))}</span>`; }
+     return esc(part);
+   }).join('');
+   return out;
+ }).join('<br>')
+}
+function openSong(k){
+ let s=data.songs[k]; if(!s)return;
+ player.ids=[k]; player.index=0; document.getElementById('player').classList.add('on'); renderPlayer();
 }
 function renderPlayer(){
  let k=player.ids[player.index],s=data.songs[k],sh=s?.transpose||0;pPos.textContent=(player.index+1)+'/'+player.ids.length;pTitle.textContent=s?.title||'—';pKey.textContent=s?.key?'Tom '+chordTok(s.key,sh):'';pKey.style.display=s?.key?'inline-block':'none';pCifra.innerHTML=renderCifra(s?.cifra||'',sh);pCifra.style.fontSize=player.font+'px';playerBody.scrollTop=0
